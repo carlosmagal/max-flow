@@ -1,5 +1,5 @@
 import numpy as np
-from simplex import Simplex, printOtimo, pivotingAuxiliar, getInput
+from simplex import Simplex, printOtimo, pivotingAuxiliar, getInput, printMatrix
 # N 0 = 0
 # I I   X
 
@@ -13,6 +13,7 @@ def main():
   simplex1 = Simplex(n, m+n, matrixAuxiliar, matrixAuxiliar)
 
   result = simplex1.runAuxiliar()
+
   if result == 0:#otimo
 
     for i in range(m+n, n+n+m):# deletando coluna de variaveis auxiliares
@@ -22,8 +23,6 @@ def main():
       matrixAuxiliar = np.delete(matrixAuxiliar, 0, 1)
 
     matrixAuxiliar = np.append(np.vstack([np.zeros(n), np.identity(n)]), matrixAuxiliar, axis=1)#colocando novo vero na matriz
-
-    # arrayC = arrayC * -1#multiplicando c por -1
 
     matrixAuxiliar[0] = arrayC #colocando c linha 0 da matriz
 
@@ -48,26 +47,20 @@ def main():
     
     if simplex2.run():#rodando simplex fase 2
       
-      print('otima')
-      print(np.around(matrixAuxiliar[0][n+m],7))
-      # print(otimo.transpose())
+      print(int(matrixAuxiliar[0][n+m]))
       printOtimo(matrixAuxiliar, n, m)
+      print(matrixAuxiliar.astype(int)[:, n:m+n+1])
       print(*np.around(matrixAuxiliar[0][0:n],7))
 
     else: 
       print('ilimitada')
       printOtimo(matrixAuxiliar, n, m)
-      print(*np.around(matrixAuxiliar[0][0:n],7))
-
 
   elif result == 1:#inviavel
     print('inviavel')
-    print(*np.around(matrixAuxiliar[0][0:n],7))
 
   else:#ilimitada
     print('ilimitada')
-    printOtimo(matrixAuxiliar, n, m)
-    print(*np.around(matrixAuxiliar[0][0:n],7))
 
 
 main()
