@@ -11,7 +11,7 @@ class Simplex:
     self.columnSizeAuxiliar = m + n + 1
 
   def runAuxiliar(self):#fase 1
-    print('\n\n')
+    print()
     while True:
       #selecionando coluna para ser pivoteada
       pivotColumn = self.getPivotColumn()
@@ -186,7 +186,8 @@ def getInput():
 
 #pivoteamento da pl auxiliar
 def pivotingAuxiliar(matrix, n, m, column):
-  if(matrix[0][column] == 0): return matrix
+  if(matrix[0][column] == 0): 
+    return matrix
 
   for i in range( n+1):
     if(matrix[i][column] == 1):#pegando index da linha do pivo
@@ -195,9 +196,3 @@ def pivotingAuxiliar(matrix, n, m, column):
         matrix[0][j] = matrix[0][j] + (multiplier*matrix[i][j])
 
   return matrix
-
-def printMatrix(n, m, matrix, begin = 0):
-  for i in range(n+1):
-    for j in range(begin, m+n+1):
-      print(int(matrix[i][j]),end=' ')
-    print('\n')
